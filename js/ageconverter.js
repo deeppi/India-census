@@ -1,5 +1,18 @@
 const fs = require('fs');
-var file = fs.readFileSync('../outputdata/India2011Merge.csv');
+module.exports=(function (obj){
+  if(!obj)
+  {
+    throw new Error('Not a number');
+  }
+  if(typeof obj!=Number)
+  {
+    throw new Error('Not a number');
+  }
+
+  else {
+
+
+var file = fs.readFileSync('./outputdata/India2011Merge.csv');
 var fileString = file.toString();
 var lines = fileString.split('\n');
 var key=new Set();
@@ -10,7 +23,6 @@ for(var i=1; i<lines.length-2; i++)
   let currentline = lines[i].split(',');
   key.add(currentline[5]);
 }
-console.log(key);
 
 for(age of key)
 {
@@ -30,5 +42,7 @@ for(let i=1; i<lines.length; i++)
 outputarray.push({Age:Age,
 Total_graduate:Total_graduate});
 }
-fs.writeFileSync('../outputdata/Ageconverstion.json', JSON.stringify(outputarray));
-console.log('done');
+fs.writeFileSync('./outputdata/Ageconverstion.json', JSON.stringify(outputarray));
+return "success";
+}
+});
